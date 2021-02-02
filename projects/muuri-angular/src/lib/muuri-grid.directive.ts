@@ -59,9 +59,16 @@ export class MuuriGridDirective implements OnInit, OnDestroy, OnChanges {
      */
     removeItem(item: ElementRef): void {
         const gridItem = this.gridObject.getItem(item.nativeElement);
-        this.gridObject.remove([gridItem], {
-            removeElements: true,
-            layout: true
-        });
+        if(gridItem === null 
+        || item === null
+        || item === undefined
+        || gridItem === undefined) {
+          //Double remotion might be happening, silence it
+        } else {
+          this.gridObject.remove([gridItem], {
+              removeElements: true,
+              layout: true
+          });
+        }
     }
 }
